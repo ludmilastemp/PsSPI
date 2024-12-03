@@ -5,6 +5,8 @@ extern "C"
 {
     struct PsSPI;
     struct PsSPI_Tool;
+    struct PsSPI_Color;
+    struct PsSPI_Event;
     PsSPI* getPsSPI ();
     void loadPlugin ();
 }
@@ -25,10 +27,24 @@ struct PsSPI_Tool
     virtual void deactivate() {};
 };
 
+struct PsSPI_Color
+{
+    unsigned char r, g, b, a;
+};
+
+struct PsSPI_Event
+{
+    bool mousePressed;
+    int  mouseCoordX;
+    int  mouseCoordY;
+};
+
 class PsSPI
 {
 public:
     virtual tool_t addTool (PsSPI_Tool* tool) = 0;
+    virtual PsSPI_Event getEvent () = 0;
+    virtual void setPixel (int x, int y, PsSPI_Color) = 0;
 };
 
 #endif /* __PsSPI__ */

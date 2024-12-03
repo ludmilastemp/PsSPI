@@ -25,7 +25,17 @@ void loadPlugin ()
 
 void ToolTest::apply ()
 {
-    std::cout << "la-la-la" << std::endl;
+    // std::cout << "la-la-la" << std::endl;
+
+    PsSPI_Event event = psspi->getEvent();
+
+    if (!event.mousePressed)
+        return;
+
+    int x = event.mouseCoordX;
+    int y = event.mouseCoordY;
+
+    psspi->setPixel (x, y, {0, 255, 255, 255});
 }
 
 void ToolTest::activate ()
