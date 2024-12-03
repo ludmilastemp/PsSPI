@@ -12,6 +12,7 @@ extern "C"
 }
 
 using tool_t = int;
+using layer_t = int;
 
 struct PsSPI_Tool
 {
@@ -44,7 +45,13 @@ class PsSPI
 public:
     virtual tool_t addTool (PsSPI_Tool* tool) = 0;
     virtual PsSPI_Event getEvent () = 0;
-    virtual void setPixel (int x, int y, PsSPI_Color) = 0;
+    virtual layer_t createLayer () = 0;
+    virtual void crearLayer () = 0;
+    virtual void crearLayer (layer_t layer) = 0;
+    virtual void overlayLayer (layer_t to) = 0;
+    virtual void overlayLayer (layer_t to, layer_t on) = 0;
+    virtual void setPixel (int x, int y, PsSPI_Color, int size = 1) = 0;
+    virtual void setPixel (layer_t layer, int x, int y, PsSPI_Color, int size = 1) = 0;
 };
 
 #endif /* __PsSPI__ */
